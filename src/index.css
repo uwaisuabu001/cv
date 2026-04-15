@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white font-sans selection:bg-white selection:text-black overflow-hidden;
+    cursor: crosshair;
+    text-transform: uppercase;
+  }
+}
+
+@layer utilities {
+  .frame {
+    @apply border-[20px] border-black box-border w-full h-screen overflow-hidden bg-white text-black;
+  }
+  .sidebar {
+    @apply bg-black p-10 flex flex-col justify-between border-r-2 border-black text-white;
+  }
+  .main-content {
+    @apply grid grid-rows-[auto_1fr_auto] h-full bg-white text-black overflow-y-auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .main-content::-webkit-scrollbar {
+    display: none;
+  }
+  .header-nav {
+    @apply p-10 flex justify-between items-start border-b-2 border-black;
+  }
+  .work-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 border-b-2 border-black;
+  }
+  .project-card {
+    @apply border-r-2 border-black h-[380px] relative overflow-hidden flex items-center justify-center bg-gray-100;
+  }
+  .footer-action {
+    @apply p-10 flex justify-between items-center;
+  }
+  .noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+  .brutalist-border {
+    @apply border-2 border-black;
+  }
+  .brutalist-border-t {
+    @apply border-t-2 border-black;
+  }
+  .brutalist-border-b {
+    @apply border-b-2 border-black;
+  }
+  .brutalist-border-l {
+    @apply border-l-2 border-black;
+  }
+  .brutalist-border-r {
+    @apply border-r-2 border-black;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 1px solid white;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease, background-color 0.2s ease;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+}
+
+.custom-cursor.hovering {
+  transform: translate(-50%, -50%) scale(3);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.custom-cursor::after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
